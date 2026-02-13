@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('est_passager_migration', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idEmploye')->constrained('employes_table');
-            $table->foreignId('idTrajet')->constrained('trajets_table');
-            $table->timestamps('dateInscription');
+            $table->foreignId('id_employe')->constrained('employes_table');
+            $table->foreignId('id_trajet')->constrained('trajets_table');
+            $table->timestamps('date_inscription');
             $table->timestamps();
         });
     }

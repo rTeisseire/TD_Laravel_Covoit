@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('voitures_table', function (Blueprint $table) {
             $table->id();
             $table->string('modele');
-            $table->integer('nbPlaces');
-            $table->foreignId('idEmploye')->constrained('employes_table');
+            $table->integer('nb_places');
+            $table->foreignId('id_employe')->constrained('employes_table');
             $table->timestamps();
         });
     }

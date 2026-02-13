@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('frequenter_table', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idCampus')->constrained('campuses_table');
-            $table->foreignId('idEmploye')->constrained('employes_table');
+            $table->foreignId('id_campus')->constrained('campuses_table');
+            $table->foreignId('id_employe')->constrained('employes_table');
             $table->timestamps();
         });
     }

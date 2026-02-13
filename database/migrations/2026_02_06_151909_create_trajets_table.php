@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('trajets_table', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idCampusDepart')->constrained('campuses_table');
-            $table->foreignId('idCampusArrivee')->constrained('campuses_table');
-            $table->foreignId('idVoiture')->constrained('voitures_table');
+            $table->foreignId('id_campus_depart')->constrained('campuses_table');
+            $table->foreignId('id_campus_arrivee')->constrained('campuses_table');
+            $table->foreignId('id_voiture')->constrained('voitures_table');
             $table->timestamps;
         });
     }

@@ -15,11 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        Employe::factory()->count(10)->create()->each(function ($employe) {
+            
+            $nbVoitures = rand(0, 2);
+            
+            if ($nbVoitures > 0) {
+                Voiture::factory()->count($nbVoitures)->create([
+                    'employe_id' => $employe->id
+                ]);
+            }
+        });
     }
 }
