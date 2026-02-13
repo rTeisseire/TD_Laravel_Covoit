@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('est_passager_migration', function (Blueprint $table) {
+        Schema::create('est_passager_table', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_employe')->constrained('employes_table');
             $table->foreignId('id_trajet')->constrained('trajets_table');
-            $table->timestamps('date_inscription');
+            $table->dateTime('date_inscription');
             $table->timestamps();
         });
     }

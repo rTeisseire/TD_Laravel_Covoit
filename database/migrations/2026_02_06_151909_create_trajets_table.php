@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('id_campus_depart')->constrained('campuses_table');
             $table->foreignId('id_campus_arrivee')->constrained('campuses_table');
             $table->foreignId('id_voiture')->constrained('voitures_table');
-            $table->timestamps;
+            $table->timestamps();
         });
     }
 
