@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Employe;
+use App\Models\Voiture;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -21,7 +22,7 @@ class DatabaseSeeder extends Seeder
             
             if ($nbVoitures > 0) {
                 Voiture::factory()->count($nbVoitures)->create([
-                    'employe_id' => $employe->id
+                    'id_employe' => $employe->id
                 ]);
             }
         });
