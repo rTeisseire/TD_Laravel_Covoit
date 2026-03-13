@@ -79,4 +79,20 @@ class VehiculeController extends Controller
         $voiture->delete();
         return $voiture;
     }
+
+    public function filtrerParNombreDePlaces(Request $request)
+    {
+        $places_min = $request->query('places_min', 2); 
+
+        $voitures = Voiture::where('nombre_places', '>=', $places_min)->with('proprietaire')->get();
+        return response()->json($voitures);
+    }
+
+    public function filtrerParModele(Request $request)
+    {
+        $modele = $request->query('modele');
+
+        $voitures = Voiture::where('modele', 'like', '%' . $modele . '%')->with('proprietaire')->get();
+        return response()->json($voitures);
+    }
 }
