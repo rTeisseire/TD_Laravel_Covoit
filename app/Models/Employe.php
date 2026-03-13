@@ -30,4 +30,25 @@ class Employe extends Model
     {
         return $this->belongsToMany(Trajet::class, 'employe_trajet')->withPivot('date_inscription');
     }
+
+    public function compterVoitures()
+    {
+        return $this->voitures()->count();
+    }
+
+    public function verifierModeleVoiture($modele)
+    {
+        return $this->voitures()->where('modele', $modele)->exists();
+    }
+
+    public function retournerStatutEmploye()
+    {
+        if ($this->voitures()->count() == 0) {
+            return 'Pas conducteur';
+        } elseif ($this->voitures()->count() == 1) {
+            return 'Conducteur';
+        } else {
+            return 'Conducteur très actif';
+        }
+    }
 }
