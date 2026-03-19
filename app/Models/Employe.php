@@ -22,7 +22,7 @@ class Employe extends Model
     // Un employé fréquente plusieurs campus (*..*)
     public function campuses()
     {
-        return $this->belongsToMany(Campus::class, 'employe_campus');
+        return $this->belongsToMany(Campus::class, 'frequenter_table', 'id_employe', 'id_campus');
     }
 
     // Un employé est passager de plusieurs trajets (*..*)

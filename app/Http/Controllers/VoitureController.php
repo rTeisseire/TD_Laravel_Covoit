@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Employe;
 use App\Models\Voiture;
 
 class VoitureController extends Controller
@@ -79,6 +80,24 @@ class VoitureController extends Controller
         $voiture = Voiture::findOrFail($id);
         $voiture->delete();
         return redirect()->route('voitures.index');
+    }
+
+    public function createForEmploye(Employe $employe)
+    {
+        return view('voitures.create_for_employe', compact('employe'));
+    }
+
+    public function storeForEmploye(Request $request, Employe $employe)
+    {
+        $validated = $request->validate([
+            'modele' => 'required|string',
+            'nb_places' => 'required|integer|min:1',
+        ]);
+
+        $validated['id_employe'] = $employe->id;
+        Voiture::create($validated);
+
+        return redirect()->route('employes.show', $employe->id);
     }
 
     public function filtrerParNombreDePlaces(Request $request)
