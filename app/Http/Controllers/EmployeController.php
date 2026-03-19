@@ -13,7 +13,8 @@ class EmployeController extends Controller
     public function index()
     {
         $employes = Employe::all();
-        return $employes;
+        return view('employes.index', compact('employes'));
+
     }
     /**
      * Show the form for creating a new resource.
@@ -34,6 +35,7 @@ class EmployeController extends Controller
             'email' => 'required|email|unique:employes',
         ]);
         Employe::create($new_employe);
+        return redirect()->route('employes.index');
     }
 
     /**
@@ -41,7 +43,17 @@ class EmployeController extends Controller
      */
     public function show($id)
     {
-        return Employe::findOrFail($id);
+        $employe = Employe::with('voitures')->findOrFail($id);
+        return view('employes.show', compact('employe'));
+    }
+
+    public function verifierModele(Request $request, $id)
+    {
+        $employe = Employe::with('voitures')->findOrFail($id);
+        $modeleRecherche = $request->input('modele');
+        $resultatVerification = $employe->verifierModeleVoiture($modeleRecherche);
+ 
+        return view('employes.show', compact('employe', 'modeleRecherche', 'resultatVerification'));
     }
 
     /**
@@ -65,7 +77,7 @@ class EmployeController extends Controller
             'email' => 'sometimes|required|email|unique:employes,email,' . $id,
         ]);
         $employe->update($updated_data);
-        return $employe;
+        return redirect()->route('employes.show', $id);
     }
 
     /**
@@ -75,6 +87,6 @@ class EmployeController extends Controller
     {
         $employe = Employe::findOrFail($id);
         $employe->delete();
-        return $employe;
+        return redirect()->route('employes.index');
     }
 }

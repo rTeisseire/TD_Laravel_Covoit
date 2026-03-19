@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Voiture;
 
-class VehiculeController extends Controller
+class VoitureController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $voiture = Voiture::all();
-        return $voiture;
+        $voiture = Voiture::with('proprietaire')->get();
+        return view('voitures.index', compact('voiture'));
     }
 
     /**
@@ -35,7 +35,7 @@ class VehiculeController extends Controller
             'id_employe' => 'required|exists:employes,id',
         ]);
         Voiture::create($new_voiture);
-        return $new_voiture;
+        return redirect()->route('voitures.index');
     }
 
     /**
@@ -43,7 +43,8 @@ class VehiculeController extends Controller
      */
     public function show(string $id)
     {
-        return Voiture::findOrFail($id);
+        $voiture = Voiture::with('proprietaire')->findOrFail($id);
+        return view('voitures.show', compact('voiture'));
     }
 
     /**
@@ -67,7 +68,7 @@ class VehiculeController extends Controller
             'id_employe' => 'sometimes|required|exists:employes,id',
         ]);
         $voiture->update($updated_data);
-        return $voiture;    
+        return redirect()->route('voitures.index');
     }
 
     /**
@@ -77,7 +78,7 @@ class VehiculeController extends Controller
     {
         $voiture = Voiture::findOrFail($id);
         $voiture->delete();
-        return $voiture;
+        return redirect()->route('voitures.index');
     }
 
     public function filtrerParNombreDePlaces(Request $request)

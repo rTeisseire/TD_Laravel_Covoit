@@ -16,7 +16,7 @@ class Employe extends Model
     // Un employé possède plusieurs voitures (1..*)
     public function voitures()
     {
-        return $this->hasMany(Voiture::class);
+        return $this->hasMany(Voiture::class, 'id_employe');
     }
 
     // Un employé fréquente plusieurs campus (*..*)
