@@ -41,4 +41,18 @@
             <p>Aucune voiture.</p>
         @endforelse
     </div>
+
+    {{-- Message d'erreur bus en rouge --}}
+    @if(session('bus_error'))
+        <div style="color: red; font-weight: bold; margin: 10px 0;">
+            {{ session('bus_error') }}
+        </div>
+    @endif
+
+    {{-- Message d'erreur général --}}
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 @endsection
